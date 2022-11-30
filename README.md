@@ -1,8 +1,6 @@
 # [qBittorrent](https://github.com/qbittorrent/qBittorrent), WireGuard and OpenVPN
-[![Docker Pulls](https://img.shields.io/docker/pulls/dyonr/qbittorrentvpn)](https://hub.docker.com/r/dyonr/qbittorrentvpn)
-[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dyonr/qbittorrentvpn/latest)](https://hub.docker.com/r/dyonr/qbittorrentvpn)
-
-**NOTE: This repository contains modifications that allow the qbittorrentvpn image to run on a Synology NAS using Linux kernel 3.10.  Please use other qbittorrent images if your environment allows for it.**
+[![Docker Pulls](https://img.shields.io/docker/pulls/amalayan/qbittorrentvpn)](https://hub.docker.com/r/amalayan/qbittorrentvpn)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/amalayan/qbittorrentvpn/latest)](https://hub.docker.com/r/amalayan/qbittorrentvpn)
 
 Docker container which runs the latest [qBittorrent](https://github.com/qbittorrent/qBittorrent)-nox client while connecting to WireGuard or OpenVPN with iptables killswitch to prevent IP leakage when the tunnel goes down.
 
@@ -10,7 +8,7 @@ Docker container which runs the latest [qBittorrent](https://github.com/qbittorr
 ![alt text][preview]
 
 # Docker Features
-* Base: Debian bullseye-slim
+* Base: Ubuntu 22.04
 * [qBittorrent](https://github.com/qbittorrent/qBittorrent) compiled from source
 * [libtorrent](https://github.com/arvidn/libtorrent) compiled from source
 * Compiled with the latest version of [Boost](https://www.boost.org/)
@@ -36,18 +34,16 @@ $ docker run  -d \
               --cap-add NET_ADMIN \
               --sysctl "net.ipv4.conf.all.src_valid_mark=1" \
               --restart unless-stopped \
-              dyonr/qbittorrentvpn
+              amalayan/qbittorrentvpn
 ```
 
 ## Docker Tags
 | Tag | Description |
 |----------|----------|
-| `dyonr/qbittorrentvpn:latest` | The latest version of qBittorrent with libtorrent 1_x_x |
-| `dyonr/qbittorrentvpn:rc_2_0` | The latest version of qBittorrent with libtorrent 2_x_x |
-| `dyonr/qbittorrentvpn:legacy_iptables` | The latest version of qBittorrent, libtorrent 1_x_x and an experimental feature to fix problems with QNAP NAS systems, [Issue #25](https://github.com/DyonR/docker-qbittorrentvpn/issues/25) |
-| `dyonr/qbittorrentvpn:alpha` | The latest alpha version of qBittorrent with libtorrent 2_0, incase you feel like testing new features |
-| `dyonr/qbittorrentvpn:dev` | This branch is used for testing new Docker features or improvements before merging it to the main branch |
-| `dyonr/qbittorrentvpn:v4_2_x` | (Legacy) qBittorrent version 4.2.x with libtorrent 1_x_x |
+| `amalayan/qbittorrentvpn:latest` | The latest version of qBittorrent|
+| `amalayan/qbittorrentvpn:x.x.x` | Version x.x.x of qBittorrent|
+| `amalayan/qbittorrentvpn:x.x.x-synology` | Version 4.x.x of qBittorrent modified to support Synology DSM using Linux kernel 3.10 |
+| `amalayan/qbittorrentvpn:alpha` | The latest alpha version of qBittorrent with libtorrent 2_0, incase you feel like testing new features |
 
 # Variables, Volumes, and Ports
 ## Environment Variables
