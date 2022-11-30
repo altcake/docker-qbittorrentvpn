@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Install packages
       run: |
-        apt install -y jq
+        sudo apt install -y jq
     - name: Get latest qbittorrent version
       id: qbversion
       run: |
