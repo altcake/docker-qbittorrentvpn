@@ -16,7 +16,7 @@ jobs:
       run: |
         echo "Latest qbittorrent version: ${{ env.QBV }}"
         echo "RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ env.QBV }})" >> $GITHUB_ENV
-        echo ${{ env.RESPONSE_CODE }}
+        echo "${{ env.RESPONSE_CODE }}"
 
         
   # build_and_push:
