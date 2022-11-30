@@ -17,8 +17,7 @@ jobs:
     - name: Get latest qbittorrent version
       id: qbversion
       run: |
-        echo "QBITTORRENT_RELEASE=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)"
-        echo "qbittorrent_version=${{ QBITTORRENT_RELEASE }}" >> $GITHUB_OUTPUT
+        echo "qbittorrent_version=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)" >> $GITHUB_OUTPUT
     - name: Check if image exists for latest qbittorrent version
       run: |
         RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ needs.check_version.outputs.qbittorrent_version }})
