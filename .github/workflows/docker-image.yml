@@ -11,10 +11,15 @@ jobs:
     - name: Install packages
       run: |
         apt install -y jq
-    - name: Check if latest qbittorrent version has an image
+    - name: Get latest qbittorrent version
       run: |
-        QBITTORRENT_RELEASE=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"')
+        QBITTORRENT_RELEASE=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)
         echo $QBITTORRENT_RELEASE
+    - name: Check if image exists for latest qbittorrent version
+      run: |
+        RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ QBITTORRENT_RELEASE }})
+        echo $RESPONSE_CODE
+
         
   # build_and_push:
   #   name: Docker image build and push to Docker Hub
