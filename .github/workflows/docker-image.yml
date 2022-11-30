@@ -21,7 +21,7 @@ jobs:
       run: |
         echo "Latest qbittorrent version: ${{ steps.qbv.outputs.QBV }}"
         echo "RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ steps.qbv.outputs.QBV }})" >> $GITHUB_OUTPUT
-
+        echo "Response code: ${{ steps.response.outputs.RESPONSE_CODE }}"
         
   # build_and_push:
   #   name: Docker image build and push to Docker Hub
