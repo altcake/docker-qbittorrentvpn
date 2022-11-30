@@ -15,12 +15,12 @@ jobs:
     - name: Get latest qbittorrent version
       id: qbv
       run: |
-        echo "::set-output name=QBV::$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)"
+        echo "QBV=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)" >> $GITHUB_OUTPUT
     - name: Check if image exists for latest qbittorrent version
       id: response
       run: |
         echo "Latest qbittorrent version: ${{ steps.qbv.outputs.QBV }}"
-        echo "::set-output name=RESPONSE_CODE::$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ steps.qbv.outputs.QBV }})"
+        echo "RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ steps.qbv.outputs.QBV }})" >> $GITHUB_OUTPUT
 
         
   # build_and_push:
