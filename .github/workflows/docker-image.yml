@@ -8,6 +8,8 @@ on:
 jobs:
   check_version:
     runs-on: ubuntu-latest
+    env:
+      QBV: $(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)
     outputs:
       qbittorrent_version: ${{ steps.qbversion.outputs.qbittorrent_version }}
     steps:
@@ -20,6 +22,7 @@ jobs:
         echo "Latest qbittorrent version: ${{ needs.check_version.outputs.qbittorrent_version }}"
         RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ needs.check_version.outputs.qbittorrent_version }})
         echo $RESPONSE_CODE
+        echo $QBV
 
         
   # build_and_push:
