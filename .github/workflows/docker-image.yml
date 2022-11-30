@@ -8,6 +8,9 @@ on:
 jobs:
   check_version:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        application-name: ['qbittorrentvpn-synology_3.10']
     outputs:
       qbversion: ${{ steps.qbv.outputs.QBV }}
       response: ${{ steps.response.outputs.RESPONSE_CODE }}
@@ -20,7 +23,7 @@ jobs:
       id: response
       run: |
         echo "Latest qbittorrent version: ${{ steps.qbv.outputs.QBV }}"
-        echo "RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ steps.qbv.outputs.QBV }})" >> $GITHUB_OUTPUT
+        echo "RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/${{ secrets.DOCKER_USER }}/repositories/${{ matrix.application-name }}/tags/${{ steps.qbv.outputs.QBV }})" >> $GITHUB_OUTPUT
     - name: Check response code
       run: |
         echo "Response code: ${{ steps.response.outputs.RESPONSE_CODE }}"
