@@ -27,7 +27,7 @@ jobs:
         
   build_and_push:
     name: Docker image build and push to Docker Hub
-    if: ${{ needs.check_version.outputs.response != "200" }}
+    if: ${{ needs.check_version.outputs.response }} != 200
     runs-on: ubuntu-latest
     strategy:
       matrix:
