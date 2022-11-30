@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        application-name: ['qbittorrentvpn-synology_3.10']
+        application-name: ['qbittorrentvpn']
     outputs:
       qbversion: ${{ steps.qbv.outputs.QBV }}
       response: ${{ steps.response.outputs.RESPONSE_CODE }}
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        application-name: ['qbittorrentvpn-synology_3.10']
+        application-name: ['qbittorrentvpn']
 
     steps:
     - name: Checkout code
