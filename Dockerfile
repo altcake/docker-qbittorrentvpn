@@ -109,16 +109,6 @@ ADD qbittorrent/ /etc/qbittorrent/
 
 RUN chmod +x /etc/qbittorrent/*.sh /etc/qbittorrent/*.init /etc/openvpn/*.sh
 
-# Apply Synology kernel 3.10 modifications
-ADD synology_3.10/syno-modifications.sh /tmp/syno-modifications.sh
-RUN bash -c "chmod +x /tmp/syno-modifications.sh; /tmp/syno-modifications.sh" \
-    && apt-get clean \
-    && apt --purge autoremove -y \
-    && rm -rf \
-    /var/lib/apt/lists/* \
-    /tmp/* \
-    /var/tmp/*
-
 EXPOSE 8080
 EXPOSE 8999
 EXPOSE 8999/udp
