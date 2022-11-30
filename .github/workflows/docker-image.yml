@@ -53,5 +53,5 @@ jobs:
     - name: Push version tagged Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}:${{ needs.check_version.outputs.qbversion }}
     
-    # - name: Push latest tagged Docker image to Docker Hub
-    #   run: docker push ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}
+    - name: Push latest tagged Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}
