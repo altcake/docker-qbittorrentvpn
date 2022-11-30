@@ -2,6 +2,8 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/dyonr/qbittorrentvpn)](https://hub.docker.com/r/dyonr/qbittorrentvpn)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dyonr/qbittorrentvpn/latest)](https://hub.docker.com/r/dyonr/qbittorrentvpn)
 
+**NOTE: This repository contains modifications that allow the qbittorrentvpn image to run on a Synology NAS using Linux kernel 3.10.  Please use other qbittorrent images if your environment allows for it.**
+
 Docker container which runs the latest [qBittorrent](https://github.com/qbittorrent/qBittorrent)-nox client while connecting to WireGuard or OpenVPN with iptables killswitch to prevent IP leakage when the tunnel goes down.
 
 [preview]: https://raw.githubusercontent.com/DyonR/docker-templates/master/Screenshots/qbittorrentvpn/qbittorrentvpn-webui.png "qBittorrent WebUI"
@@ -131,6 +133,7 @@ Please provide logs, Docker version and other information that can simplify repr
 If possible, always use the most up to date version of Docker, you operating system, kernel and the container itself. Support is always a best-effort basis.
 
 ### Credits:
+[DyonR/docker-qbittorrentvpn](https://github.com/DyonR/docker-qbittorrentvpn)
 [MarkusMcNugen/docker-qBittorrentvpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn)  
 [DyonR/jackettvpn](https://github.com/DyonR/jackettvpn)  
 This projects originates from MarkusMcNugen/docker-qBittorrentvpn, but forking was not possible since DyonR/jackettvpn uses the fork already.
