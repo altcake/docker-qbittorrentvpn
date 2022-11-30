@@ -1,5 +1,5 @@
 # qBittorrent, OpenVPN and WireGuard, qbittorrentvpn
-FROM debian:bullseye-slim
+FROM ubuntu:22.04
 
 WORKDIR /opt
 
@@ -70,11 +70,7 @@ RUN apt update \
     /var/tmp/*
 
 # Install WireGuard and some other dependencies some of the scripts in the container rely on.
-RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list \
-    && printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable \
-    && echo "deb http://deb.debian.org/debian/ bullseye non-free" > /etc/apt/sources.list.d/non-free-unrar.list \
-    && printf 'Package: *\nPin: release a=non-free\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-non-free \
-    && apt update \
+RUN apt update \
     && apt install -y --no-install-recommends \
     ca-certificates \
     dos2unix \
@@ -85,7 +81,7 @@ RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.li
     libqt5network5 \
     libqt5xml5 \
     libqt5sql5 \
-    libssl1.1 \
+    libssl-dev \
     moreutils \
     net-tools \
     openresolv \
@@ -112,16 +108,6 @@ ADD openvpn/ /etc/openvpn/
 ADD qbittorrent/ /etc/qbittorrent/
 
 RUN chmod +x /etc/qbittorrent/*.sh /etc/qbittorrent/*.init /etc/openvpn/*.sh
-
-# Apply Synology kernel 3.10 modifications
-ADD synology_3.10/syno-modifications.sh /tmp/syno-modifications.sh
-RUN bash -c "chmod +x /tmp/syno-modifications.sh; /tmp/syno-modifications.sh" \
-    && apt-get clean \
-    && apt --purge autoremove -y \
-    && rm -rf \
-    /var/lib/apt/lists/* \
-    /tmp/* \
-    /var/tmp/*
 
 EXPOSE 8080
 EXPOSE 8999
