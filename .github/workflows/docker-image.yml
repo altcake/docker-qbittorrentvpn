@@ -64,5 +64,11 @@ jobs:
     - name: Build version tagged Synology Docker image
       run: docker build --file Dockerfile.synology --tag ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}:${{ needs.check_version.outputs.qbversion }}-synology .
 
+    - name: Build latest tagged Synology Docker image
+      run: docker build --file Dockerfile.synology --tag ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}:latest-synology .
+
     - name: Push version tagged Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}:${{ needs.check_version.outputs.qbversion }}-synology
+
+    - name: Push latest tagged Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_USER }}/${{ matrix.application-name }}:latest-synology
