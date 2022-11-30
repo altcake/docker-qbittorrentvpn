@@ -8,19 +8,15 @@ on:
 jobs:
   check_version:
     runs-on: ubuntu-latest
-    outputs:
-      qbittorrent_version: ${{ steps.qbversion.outputs.qbittorrent_version }}
     steps:
     - name: Get latest qbittorrent version
-      id: qbversion
       run: |
         echo "QBV=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"' | cut -d '-' -f 2)" >> $GITHUB_ENV
     - name: Check if image exists for latest qbittorrent version
       run: |
-        echo "Latest qbittorrent version: ${{ needs.check_version.outputs.qbittorrent_version }}"
-        RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ needs.check_version.outputs.qbittorrent_version }})
+        echo "Latest qbittorrent version: ${{ env.QBV }}"
+        RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/namespaces/amalayan/repositories/qbittorrentvpn-synology_3.10/tags/${{ env.QBV }})
         echo $RESPONSE_CODE
-        echo ${{ env.QBV }}
 
         
   # build_and_push:
