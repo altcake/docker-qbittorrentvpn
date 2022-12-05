@@ -39,8 +39,8 @@ jobs:
 
     steps:
     - name: Debug
-      run: echo "Response code received: ${{ needs.check_version.outputs.response }}"
-      run: echo "GitHub event name: ${{ github.event_name }}"
+      run: echo "Response code received - ${{ needs.check_version.outputs.response }}"
+      run: echo "GitHub event name - ${{ github.event_name }}"
       
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
