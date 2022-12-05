@@ -31,13 +31,17 @@ jobs:
   build_and_push:
     name: Docker image build and push to Docker Hub
     needs: check_version
-    if: (needs.check_version.outputs.response != '200') || (${{ github.event_name == 'workflow_dispatch' }})
+    if: (${{needs.check_version.outputs.response}} != '200') || (${{ github.event_name == 'workflow_dispatch' }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         application-name: ['qbittorrentvpn']
 
     steps:
+    - name: Debug
+      run: echo "Response code received: ${{ needs.check_version.outputs.response }}"
+      run: echo "GitHub event name: ${{ github.event_name }}"
+      
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
 
