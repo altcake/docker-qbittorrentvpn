@@ -38,8 +38,10 @@ jobs:
         application-name: ['qbittorrentvpn']
 
     steps:
-    - name: Debug
+    - name: Debug - Response Code
       run: echo "Response code received - ${{ needs.check_version.outputs.response }}"
+
+    - name: Debug - GitHub Event Name
       run: echo "GitHub event name - ${{ github.event_name }}"
       
     - name: Set up QEMU
