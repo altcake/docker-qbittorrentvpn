@@ -40,10 +40,10 @@ $ docker run  -d \
 ## Docker Tags
 | Tag | Description | Architecture |
 |----------|----------|----------|
-| `amalayan/qbittorrentvpn:latest` | The latest version of qBittorrent | `linux/amd64`, `linux/arm64` |
+| `amalayan/qbittorrentvpn:latest` | The latest version of qBittorrent | `linux/amd64`, `linux/arm64`, `linux/arm` |
 | `amalayan/qbittorrentvpn:latest-synology` | The latest version of qBittorrent modified to support Synology DSM using Linux kernel 3.10 | `linux/amd64` |
-| `amalayan/qbittorrentvpn:x.x.x` | Version x.x.x of qBittorrent | `linux/amd64`, `linux/arm64` |
-| `amalayan/qbittorrentvpn:x.x.x-synology` | Version 4.x.x of qBittorrent modified to support Synology DSM using Linux kernel 3.10 | `linux/amd64` |
+| `amalayan/qbittorrentvpn:x.x.x` | Version x.x.x of qBittorrent | `linux/amd64`, `linux/arm64`, `linux/arm` |
+| `amalayan/qbittorrentvpn:x.x.x-synology` | Version x.x.x of qBittorrent modified to support Synology DSM using Linux kernel 3.10 | `linux/amd64` |
 | `amalayan/qbittorrentvpn:alpha` | The latest alpha version of qBittorrent with libtorrent 2_0, incase you feel like testing new features | |
 
 # Variables, Volumes, and Ports
