@@ -1,5 +1,5 @@
 # qBittorrent, OpenVPN and WireGuard, qbittorrentvpn
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 WORKDIR /opt
 
@@ -25,6 +25,8 @@ RUN apt update \
     pkg-config \
     qtbase5-dev \
     qttools5-dev \
+    qtbase5-private-dev \
+    libqt5svg5-dev \
     zlib1g-dev \
     && LIBTORRENT_ASSETS=$(curl -sX GET "https://api.github.com/repos/arvidn/libtorrent/releases" | jq '.[] | select(.prerelease==false) | select(.target_commitish=="RC_1_2") | .assets_url' | head -n 1 | tr -d '"') \
     && LIBTORRENT_DOWNLOAD_URL=$(curl -sX GET ${LIBTORRENT_ASSETS} | jq '.[0] .browser_download_url' | tr -d '"') \
@@ -61,6 +63,8 @@ RUN apt update \
     pkg-config \
     qtbase5-dev \
     qttools5-dev \
+    libqt5svg5-dev \
+    qtbase5-private-dev \
     zlib1g-dev \
     && apt-get clean \
     && apt --purge autoremove -y \
